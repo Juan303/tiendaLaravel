@@ -2,6 +2,7 @@
 
 @section('body-class', 'signup-page sidebar-collapse')
 
+@section('title', 'Mi tienda Laravel: Login')
 
 @section('content')
 <div class="page-header header-filter" filter-color="purple" style="background-image: url('{{ asset('img/bg7.jpg')}}">
