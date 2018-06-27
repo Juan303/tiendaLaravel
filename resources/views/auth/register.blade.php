@@ -13,7 +13,7 @@
               <div class="row">
 
                 <div class="col-md-10 m-auto">
-                  <div class="social text-center">
+                 <!--  <div class="social text-center">
                     <button class="btn btn-just-icon btn-round btn-twitter">
                       <i class="fa fa-twitter"></i>
                     </button>
@@ -24,7 +24,7 @@
                       <i class="fa fa-facebook"> </i>
                     </button>
                     <h4> Introduce los datos de registro </h4>
-                  </div>
+                  </div> -->
                   <form class="form" method="POST" action="{{ route('register') }}">
                   {{ csrf_field() }}
                     <div class="form-group">
@@ -49,7 +49,7 @@
                             <i class="material-icons">mail</i>
                           </span>
                         </div>
-                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="Email..." autofocus>
+                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="Correo Electrónico..." autofocus>
                         @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -64,14 +64,16 @@
                             <i class="material-icons">lock_outline</i>
                           </span>
                         </div>
-                        <input id="password" placeholder="Contraseña..."type="password" class="form-control" name="password" required>
+                        <input id="password" placeholder="Contraseña..."type="password" class="form-control" name="password" required><br>
                         @if ($errors->has('password'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password') }}</strong>
                             </span>
                         @endif
                       </div>
-                      <div class="input-group">
+                    </div>
+                    <div class="form-group">
+                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text pl-0">
                             <i class="material-icons">timeline</i>
@@ -79,15 +81,6 @@
                         </div>
                         <input id="password-confirm" placeholder="Repite la contraseña..." type="password" class="form-control" name="password_confirmation" required>
                       </div>
-                    </div>
-                    <div class="form-check p-0 text-center">
-                      <label class="form-check-label ml-0">
-                        <input class="form-check-input" name="remember" {{ old('remember') ? 'checked' : '' }} type="checkbox">
-                        <span class="form-check-sign">
-                          <span class="check"></span>
-                        </span>
-                        Recordar sesion.
-                      </label>
                     </div>
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary btn-round">Empezar</a>

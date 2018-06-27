@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   
   <title>
-    @yield('title')
+    @yield('title', 'Tienda Arcade')
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -17,13 +17,14 @@
   <!-- CSS Files -->
   <link href="{{ asset('css/material-kit.css?v=2.0.3') }}" rel="stylesheet" />
   <link href="{{ asset('demo/demo.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/mi_css.css') }}" rel="stylesheet" />
 </head>
 
 <body class="@yield('body-class')">
-<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="{{route('home')}}">
+        <a class="navbar-brand" href="{{url('/')}}">
           Mi Tienda Laravel </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -35,8 +36,16 @@
         <ul class="navbar-nav ml-auto">
          <!-- Authentication Links -->
           @guest
-              <li><a class="nav-link text-light" href="{{ route('login') }}">Acceso</a></li>
-              <li><a class="nav-link text-light" href="{{ route('register') }}">Registro</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">
+                  Acceso
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">
+                 Registro
+                </a>
+              </li>
           @else
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
@@ -48,7 +57,7 @@
                           <a href="{{ route('logout') }}"
                               onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();">
-                              Logout
+                              Salir
                           </a>
 
                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -78,9 +87,9 @@
       </div>
     </div>
   </nav>
-<div class="wrapper">
-  @yield('content')
-</div>
+  <div class="wrapper">
+    @yield('content')
+  </div>
   
   <!--   Core JS Files   -->
   <script src="{{ asset('js/core/jquery.min.js') }}" type="text/javascript"></script>
