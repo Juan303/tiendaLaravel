@@ -16,6 +16,7 @@
                 <h2 class="title">Listado de productos</h2>
                 <div class="team">
                     <div class="row">
+                        <a class="btn btn-success" href="{{ url('admin/products/create') }}">Nuevo producto</a>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -33,66 +34,34 @@
                                     <td class="text-center">{{ $product->id }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->description }}</td>
-                                    <td>{{ $product->category->name }}</td>
+                                    <td>{{ $product->category ? $product->category->name : 'General' }}</td>
                                     <td class="text-right">{{ $product->price }}€</td>
                                     <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Detalles" class="btn btn-info btn-simple btn-xs">
+                                        <button type="button" rel="tooltip" title="Detalles" class="btn btn-link text-info btn-xs">
                                             <i class="fa fa-info"></i>
                                         </button>
-                                        <button type="button" rel="tooltip" title="Editar" class="btn btn-success btn-simple btn-xs">
+                                        <a href="{{ url('admin/products/edit/'.$product->id) }}" type="button" rel="tooltip" title="Editar" class="btn btn-link text-info  btn-xs">
                                             <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>
+                                        </a>
+                                        <form action="{{ url('admin/products/'.$product->id) }}" method="post" class="d-inline">
+                                            {{ csrf_field() }} <!-- es equivalente a <input type="hidden" name="_token" value="csrf_token" /> -->
+                                            {{ method_field('DELETE') }} <!-- es equivalente a <input type="hidden" name="_method" value="DELETE" /> -->
+                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-link text-danger  btn-xs">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </form>
+                                       
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $products-> links('vendor\pagination\bootstrap-4') }}
                     </div>
                 </div>
             </div>
        
         </div>
     </div>
-    <footer class="footer footer-default">
-        <div class="container">
-            <nav class="float-left">
-            <ul>
-                <li>
-                    <a href="https://www.creative-tim.com">
-                        Creative Tim
-                    </a>
-                </li>
-                <li>
-                    <a href="https://presentation.creative-tim.com">
-                        About Us
-                    </a>
-                </li>
-                <li>
-                    <a href="https://blog.creative-tim.com">
-                        Blog
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.creative-tim.com/license">
-                        Licenses
-                    </a>
-                </li>
-            </ul>
-            </nav>
-            <div class="copyright float-right">
-                &copy;
-                <script>
-                    document.write(new Date().getFullYear())
-                </script>, made with
-                <i class="material-icons">favorite</i> by
-                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-            </div>
-        </div>
-    </footer>
-    
-    
-
+    @include('includes.footer')
 @endsection

@@ -11,6 +11,9 @@
 |
 */
 
+//Las rutas GET solo para obtener o consultar informacion
+//Las rutas POST para modificar la base de datos (insertar, eliminar, editar) ya que usan el token csrf
+
 Route::get('/', 'TestController@welcome');
 
 
@@ -18,13 +21,24 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//CRUD
-//CR (Create & Read)
-Route::get('/admin/products', 'ProductController@index'); //listar
-Route::get('/admin/products/create', 'ProductController@create'); //formulario de registro
-Route::post('/admin/products', 'ProductController@store'); //almacenar el producto
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){
+    //CRUD productos
+    //CR (Create & Read)
+    Route::get('/products', 'ProductController@index'); //listar
+    Route::get('/products/create', 'ProductController@create'); //formulario de registro
+    Route::post('/products', 'ProductController@store'); //almacenar el producto
 
-//CR (Update & Delete)
+    //UD (Update & Delete)
+
+    Route::get('/products/edit/{id}', 'ProductController@edit'); //editar producto
+    Route::post('/products/update/{id}', 'ProductController@update'); //guardar cambios producto
+
+    Route::delete('/products/{id}', 'ProductController@delete'); //guardar cambios producto
+});
+
+
+
+
 
 
 

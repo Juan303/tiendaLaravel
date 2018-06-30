@@ -48,11 +48,16 @@
               </li>
           @else
               <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                  <a class="btn btn-info" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                       {{ Auth::user()->name }} <span class="caret"></span>
                   </a>
 
                   <ul class="dropdown-menu">
+                    @if(auth()->user()->admin)
+                      <li>
+                        <a href="{{ url('/admin/products') }}">Gestionar productos</a>
+                      </li>
+                    @endif
                       <li>
                           <a href="{{ route('logout') }}"
                               onclick="event.preventDefault();
@@ -67,28 +72,14 @@
                   </ul>
               </li>
           @endguest
-
-         <!--  <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on Twitter">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on Facebook">
-              <i class="fa fa-facebook-square"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram">
-              <i class="fa fa-instagram"></i>
-            </a>
-          </li> -->
         </ul>
       </div>
     </div>
   </nav>
   <div class="wrapper">
     @yield('content')
+    
+    
   </div>
   
   <!--   Core JS Files   -->
