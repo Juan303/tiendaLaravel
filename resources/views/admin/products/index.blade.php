@@ -22,7 +22,7 @@
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th class="col-md-2">Nombre</th>
-                                    <th class="col-md-4">Descripción</th>
+                                    <th class="col-md-5">Descripción</th>
                                     <th>Categoría</th>
                                     <th class="text-right">Precio</th>
                                     <th class="text-right">Opciones</th>
@@ -37,16 +37,19 @@
                                     <td>{{ $product->category ? $product->category->name : 'General' }}</td>
                                     <td class="text-right">{{ $product->price }}€</td>
                                     <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Detalles" class="btn btn-link text-info btn-xs">
+                                        <button type="button" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info">
                                             <i class="fa fa-info"></i>
                                         </button>
-                                        <a href="{{ url('admin/products/edit/'.$product->id) }}" type="button" rel="tooltip" title="Editar" class="btn btn-link text-info  btn-xs">
+                                        <a href="{{ url('admin/products/edit/'.$product->id) }}" type="button" rel="tooltip" title="Editar" class="btn btn-link px-1 text-info px-0">
                                             <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{ url('admin/products/edit/'.$product->id) }}" type="button" rel="tooltip" title="Imagenes" class="btn btn-link px-1 text-warning px-0">
+                                            <i class="fa fa-image"></i>
                                         </a>
                                         <form action="{{ url('admin/products/'.$product->id) }}" method="post" class="d-inline">
                                             {{ csrf_field() }} <!-- es equivalente a <input type="hidden" name="_token" value="csrf_token" /> -->
                                             {{ method_field('DELETE') }} <!-- es equivalente a <input type="hidden" name="_method" value="DELETE" /> -->
-                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-link text-danger  btn-xs">
+                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn px-1 btn-link text-danger">
                                                 <i class="fa fa-times"></i>
                                             </button>
                                         </form>
