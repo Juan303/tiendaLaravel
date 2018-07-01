@@ -18,11 +18,11 @@
                
                 <div class="row">
                      <div class="col-12">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="card">
                                 <h5 class="card-title">Subir imagen</h5>
                                 {{ csrf_field() }}
-                                <input type="file" id="inputGroupFile01" required>
+                                <input type="file" name="photo" id="inputGroupFile01" required>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Subir</button>
                                     <a href="{{ url('admin/products') }}" class="btn btn-warning">Volver</a>
@@ -33,12 +33,12 @@
                     @foreach ($images as $image)
                     <div class="col-3">
                         <div class="card">
-                            <img class="card-img-top" src="{{ $image->image }}}" alt="Card image cap">
+                            <img class="card-img-top" src="{{ $image->url }}" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <form action="" method="post">
+                                <h5 class="card-title">titulo</h5>
+                                <form action="{{ url('admin/products/images/'.$image->id) }}" method="post">
                                     {{ csrf_field() }}
-                                    
+                                    {{ method_field('DELETE') }}
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                 </form>
                                 <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
