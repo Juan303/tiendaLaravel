@@ -34,6 +34,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){
     Route::post('/products/update/{id}', 'ProductController@update'); //guardar cambios producto
 
     Route::delete('/products/{id}', 'ProductController@delete'); //guardar cambios producto
+
+    Route::get('/products/images/{id}', 'ImageController@index'); //listar imagenes
+    Route::post('/products/images/{id}', 'ImageController@store'); //almacenar imagenes
+    Route::delete('/products/images/{id}', 'ImageController@delete'); //guardar cambios producto
+
+
+
 });
 
 

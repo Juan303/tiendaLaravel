@@ -43,7 +43,7 @@
                                         <a href="{{ url('admin/products/edit/'.$product->id) }}" type="button" rel="tooltip" title="Editar" class="btn btn-link px-1 text-info px-0">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="{{ url('admin/products/edit/'.$product->id) }}" type="button" rel="tooltip" title="Imagenes" class="btn btn-link px-1 text-warning px-0">
+                                        <a href="{{ url('admin/products/images/'.$product->id) }}" type="button" rel="tooltip" title="Imagenes" class="btn btn-link px-1 text-warning px-0">
                                             <i class="fa fa-image"></i>
                                         </a>
                                         <form action="{{ url('admin/products/'.$product->id) }}" method="post" class="d-inline">
