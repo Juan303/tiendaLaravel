@@ -77,6 +77,7 @@
                 $table->float('price'); -->
 
                 </form>
+                
             </div>
         </div>
     </div>
