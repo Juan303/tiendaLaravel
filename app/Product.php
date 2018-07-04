@@ -17,6 +17,8 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
+    //=====================================================ACCESSORS (Es un getter pero que tiene cierta 
+    //=====================================================logica por si no hay una categoria, o para que se muestre una imagen destacada)
     public function getFeaturedImageUrlAttribute(){
         
         $featuredImage = $this->product_images()->where('featured', true)->first();
@@ -27,5 +29,13 @@ class Product extends Model
             }
         }
         return $featuredImage->url;
+    }
+
+    public function getCategoryNameAttribute(){
+        
+        if(!isset($this->category->name)){
+           return "Sin categoria";
+        }
+        return $this->category->name;
     }
 }

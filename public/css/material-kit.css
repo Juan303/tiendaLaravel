@@ -4034,6 +4034,9 @@ tbody.collapse.show {
 .custom-file-input:lang(en)~.custom-file-label::after {
   content: "Browse";
 }
+.custom-file-input:lang(es)~.custom-file-label::after {
+  content: "Buscar";
+}
 
 .custom-file-label {
   position: absolute;
@@ -6299,6 +6302,26 @@ button.bg-dark:focus {
 
 .border-left-0 {
   border-left: 0 !important;
+}
+
+.border-width-2 {
+  border-width: 2px !important;
+}
+
+.border-top-width-2 {
+  border-top-width: 2px !important;
+}
+
+.border-right-width-2 {
+  border-right-width: 2px !important;
+}
+
+.border-bottomwidth-2 {
+  border-bottom-width: 2px !important;
+}
+
+.border-left-width-2 {
+  border-left-width: 2px !important;
 }
 
 .border-primary {

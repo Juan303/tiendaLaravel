@@ -17,15 +17,15 @@
                 <div class="team">
                     <div class="row">
                         <a class="btn btn-success" href="{{ url('admin/products/create') }}">Nuevo producto</a>
-                        <table class="table">
+                        <table class="table col-md-12">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="col-md-2">Nombre</th>
-                                    <th class="col-md-5">Descripción</th>
+                                    <th class="">Nombre</th>
+                                    <th class="">Descripción</th>
                                     <th>Categoría</th>
                                     <th class="text-right">Precio</th>
-                                    <th class="text-right">Opciones</th>
+                                    <th class="text-right" style="width:15%">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,22 +34,22 @@
                                     <td class="text-center">{{ $product->id }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->description }}</td>
-                                    <td>{{ $product->category ? $product->category->name : 'General' }}</td>
+                                    <td>{{ $product->category_name }}</td>
                                     <td class="text-right">{{ $product->price }}€</td>
                                     <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info">
+                                        <button type="button" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info my-0 py-0">
                                             <i class="fa fa-info"></i>
                                         </button>
-                                        <a href="{{ url('admin/products/edit/'.$product->id) }}" type="button" rel="tooltip" title="Editar" class="btn btn-link px-1 text-info px-0">
+                                        <a href="{{ url('admin/products/edit/'.$product->id) }}"  rel="tooltip" title="Editar" class="btn btn-link px-1 text-info px-0 my-0 py-0">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="{{ url('admin/products/images/'.$product->id) }}" type="button" rel="tooltip" title="Imagenes" class="btn btn-link px-1 text-warning px-0">
+                                        <a href="{{ url('admin/products/images/'.$product->id) }}" rel="tooltip" title="Editar" class="btn btn-link px-1 text-info px-0 my-0 py-0">
                                             <i class="fa fa-image"></i>
                                         </a>
                                         <form action="{{ url('admin/products/'.$product->id) }}" method="post" class="d-inline">
                                             {{ csrf_field() }} <!-- es equivalente a <input type="hidden" name="_token" value="csrf_token" /> -->
                                             {{ method_field('DELETE') }} <!-- es equivalente a <input type="hidden" name="_method" value="DELETE" /> -->
-                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn px-1 btn-link text-danger">
+                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn px-1 btn-link text-danger my-0 py-0">
                                                 <i class="fa fa-times"></i>
                                             </button>
                                         </form>
@@ -59,7 +59,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $products-> links('vendor\pagination\bootstrap-4') }}
+                        {{ $products-> links('vendor/pagination/bootstrap-4') }}
                     </div>
                 </div>
             </div>

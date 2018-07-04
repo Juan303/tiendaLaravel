@@ -68,16 +68,8 @@
                 </div>
                 <div class="form-group">
                     <a href="{{ url('admin/products') }}" class="btn btn-warning">Volver</a>
-                    <button class="btn btn-primary">Registrar</button>
+                    <button class="btn btn-primary">Siguiente</button>
                 </div>
-                
-                
-                
-            <!--  $table->string('name');
-                $table->string('description');
-                $table->text('long_description');
-                $table->float('price'); -->
-
                 </form>
             </div>
         </div>

@@ -68,15 +68,8 @@
                     <a href="{{ url('admin/products') }}" class="btn btn-warning">Volver</a>
                     <button class="btn btn-primary">Guardar cambios</button>
                 </div>
-                
-                
-                
-            <!--  $table->string('name');
-                $table->string('description');
-                $table->text('long_description');
-                $table->float('price'); -->
-
                 </form>
+              
                 
             </div>
         </div>

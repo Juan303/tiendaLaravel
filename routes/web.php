@@ -39,6 +39,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){
     Route::post('/products/images/{id}', 'ImageController@store'); //almacenar imagenes
     Route::delete('/products/images/{id}', 'ImageController@delete'); //guardar cambios producto
 
+    Route::get('/products/images/select/{id}/{image_id}', 'ImageController@destacar'); //destacar imagen
+
+
 
 
 });

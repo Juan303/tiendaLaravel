@@ -7,37 +7,42 @@ use App\Product;
 
 class ProductController extends Controller
 {
+    //mensajes de validacion
+
+    //reglas de validacion
+
+    private $messages = [
+        'name.required' => 'El campo nombre es obligatorio',
+        'name.min' => 'El campo nombre debe contener 3 caracteres como mínimo',
+        'description.required' => 'El campo descripcion es obligatorio',
+        'description.max' => 'El campo descripcion no puede contener mas de 200 caracteres',
+        'price.required' => 'El campo del precio es obligatorio',
+        'price.numeric' => 'El campo del precio debe ser numérico',
+        'price.min' => 'El campo del precio debe ser un numero positivo',
+    ];
+
+    private $rules = [
+        'name' => 'required|min:3',
+        'description' => 'required|max:200',
+        'price' => 'required|numeric|min:0',
+    ];
+
+
     public function index(){
         $products = Product::paginate(10);
         return view('admin.products.index')->with(compact('products')); //listado de productos
     }
+
+
     public function create(){
         return view('admin.products.create'); //formulario de registro
     }
+
+
     public function store(Request $request){
 
         //dd($request->all()); //muestra todos los datos request
-        
-        //mensajes de validacion
-        $messages = [
-            'name.required' => 'El campo nombre es obligatorio',
-            'name.min' => 'El campo nombre debe contener 3 caracteres como mínimo',
-            'description.required' => 'El campo descripcion es obligatorio',
-            'description.max' => 'El campo descripcion no puede contener mas de 200 caracteres',
-            'price.required' => 'El campo del precio es obligatorio',
-            'price.numeric' => 'El campo del precio debe ser numérico',
-            'price.min' => 'El campo del precio debe ser un numero positivo',
-        ];
-        
-        //reglas de validacion
-        $rules = [
-            'name' => 'required|min:3',
-            'description' => 'required|max:200',
-            'price' => 'required|numeric|min:0',
-        ];
-
-        $this->validate($request, $rules, $messages);
-
+        $this->validate($request, $this->rules, $this->messages);
 
         $product = new Product();
 
@@ -48,34 +53,20 @@ class ProductController extends Controller
 
         $product->save(); //insert
 
-        return redirect('admin/products');
+        return redirect('admin/products/images/'.$product->id);
     }
+
+
     public function edit($id){
         $product = Product::find($id);
-        return view('admin.products.edit')->with(compact('product')); //formulario de registro
+        $images = $product->product_images;
+        return view('admin.products.edit')->with(compact('product', 'images')); //formulario de registro
     }
+
 
      public function update(Request $request, $id){
 
-        //mensajes de validacion
-        $messages = [
-            'name.required' => 'El campo nombre es obligatorio',
-            'name.min' => 'El campo nombre debe contener 3 caracteres como mínimo',
-            'description.required' => 'El campo descripcion es obligatorio',
-            'description.max' => 'El campo descripcion no puede contener mas de 200 caracteres',
-            'price.required' => 'El campo del precio es obligatorio',
-            'price.numeric' => 'El campo del precio debe ser numérico',
-            'price.min' => 'El campo del precio debe ser un numero positivo',
-        ];
-
-        //reglas de validacion
-        $rules = [
-            'name' => 'required|min:3',
-            'description' => 'required|max:200',
-            'price' => 'required|numeric|min:0',
-        ];
-
-        $this->validate($request, $rules, $messages);
+        $this->validate($request, $this->rules, $this->messages);
 
 
         $product = Product::find($id); //busco el producto donde guardar la info
@@ -87,8 +78,9 @@ class ProductController extends Controller
 
         $product->save(); //guardo la info
 
-        return redirect('admin/products');
+        return redirect('');
     }
+
 
     public function delete($id){
         $product = Product::find($id);
