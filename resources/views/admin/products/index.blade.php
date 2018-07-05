@@ -59,6 +59,8 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mx-auto">
                         {{ $products-> links('vendor/pagination/bootstrap-4') }}
                     </div>
                 </div>
