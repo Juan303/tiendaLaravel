@@ -21,7 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/products/{id}', 'ProductController@show'); //listar
+Route::get('/products/{id}', 'ProductController@show'); //listar sin ser admin
+
+Route::post('/cart', 'CartDetailController@store');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group(function(){
     //CRUD productos

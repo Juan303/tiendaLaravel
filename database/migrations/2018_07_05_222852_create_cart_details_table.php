@@ -17,7 +17,7 @@ class CreateCartDetailsTable extends Migration
             $table->increments('id');
 
             $table->integer('quantity');
-            $table->integer('discount');     // porcentaje de descuento       
+            $table->integer('discount')->default(0);     // porcentaje de descuento       
             
             //FK's
             $table->integer('cart_id')->unsigned();

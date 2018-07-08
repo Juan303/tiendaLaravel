@@ -12,7 +12,7 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
-                <h2 class="title">Dashboard</h2>
+                <h2 class="title">Bienvenido {{ auth()->user()->name }}</h2>
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
@@ -36,6 +36,43 @@
                         </a>
                     </li>
                 </ul>
+               
+                <table class="table col-md-12">
+                    <thead>
+                        <tr>
+                            <th class="">Imagen</th>
+                            <th class="">Nombre</th>
+                            <th class="">Descripcion</th>
+                            <th class="">Cantidad</th>
+                            <th class="text-right">Precio</th>
+                            <th class="text-right" style="width:15%">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach(auth()->user()->cart->details as $cartdetail)
+                        <tr>
+                            <td><img src="{{ $cartdetail->product->featured_image_url }}" alt=""></td>
+                            <td>{{ $cartdetail->product->name }}</td>
+                            <td>{{ $cartdetail->product->description }}</td>
+                            <td>{{ $cartdetail->quantity }}</td>
+                            <td class="text-right">{{ $cartdetail->product->price }}€</td>
+                            <td class="td-actions text-right">
+                                <button type="button" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info my-0 py-0">
+                                    <i class="fa fa-info"></i>
+                                </button>
+                                <form action="{{ url('products/'.$cartdetail->product->id) }}" method="post" class="d-inline">
+                                    {{ csrf_field() }} <!-- es equivalente a <input type="hidden" name="_token" value="csrf_token" /> -->
+                                    {{ method_field('DELETE') }} <!-- es equivalente a <input type="hidden" name="_method" value="DELETE" /> -->
+                                    <button type="submit" rel="tooltip" title="Eliminar" class="btn px-1 btn-link text-danger my-0 py-0">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </form>
+
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
