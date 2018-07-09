@@ -16,4 +16,11 @@ class CartDetailController extends Controller
         
         return back();
     }
+
+    public function delete($id){
+        
+        $cartDetail = CartDetails::find($id);
+        $cartDetail->delete();
+        return back();
+    }
 }
