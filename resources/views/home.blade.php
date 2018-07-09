@@ -37,6 +37,17 @@
                     </li>
                 </ul>
                 <hr>
+                @if(session('notification'))
+                   @if(session('error')==true)
+                    <div class="alert alert-success">
+                        {{ session('notification') }}
+                    </div>
+                    @else
+                     <div class="alert alert-warning">
+                        {{ session('notification') }}
+                    </div>
+                    @endif
+                @endif
                 <p>Tu carrito de compra tiene {{ count(auth()->user()->cart->details) }} productos</p>
                
                 <table class="table col-md-12">

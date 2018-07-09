@@ -20,7 +20,16 @@ class CartDetailController extends Controller
     public function delete($id){
         
         $cartDetail = CartDetails::find($id);
-        $cartDetail->delete();
-        return back();
+        $error = false;
+        if($cartDetail->cart_id === auth()->user()->cart->id){
+            $cartDetail->delete();
+            $error = true;
+            $notification = "El producto se ha eliminado del carrito correctamente";
+        }
+        else{
+            $notification = "Error al eliminar el producto del carrito";
+        }
+       
+        return back()->with(compact('notification', 'error'));
     }
 }
