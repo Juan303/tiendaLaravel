@@ -15,6 +15,17 @@
                   <div class="avatar">
                     <img src="{{ $product->featured_image_url }}" alt="Circle Image" class="img-raised full-rounded img-fluid">
                   </div>
+                  @if(session('notification'))
+                    @if(session('error')==false)
+                      <div class="alert alert-success">
+                          {{ session('notification') }}
+                      </div>
+                      @else
+                      <div class="alert alert-warning">
+                          {{ session('notification') }}
+                      </div>
+                      @endif
+                  @endif
                   <div class="name">
                     <h3 class="title">{{ $product->name }}</h3>
                     <h6>{{ $product->category_name }}</h6>
@@ -29,17 +40,11 @@
               <p>{{ $product->long_description }}</p>
             </div>
             <div class="text-center">
-                <button class="btn btn-success rounded" data-toggle="modal" data-target="#modalAddToCart">Agregar al carrito</button>
+                <button class="btn btn-info rounded" data-toggle="modal" data-target="#modalAddToCart">Agregar al carrito</button>
                 
             </div>
-            
-            <!-- Modal -->
-          
-            
-            
             <div class="tab-content tab-space">
               <div class="tab-pane active text-center gallery" id="studio">
-              
                 <div class="row">
                   <div class="col-md-3 ml-auto">
                     @for($i=0; $i < count($images); $i+=2)
@@ -57,6 +62,8 @@
           </div>
         </div>
     </div>
+
+    <!-- Modal -->
    <div class="modal fade" id="modalAddToCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

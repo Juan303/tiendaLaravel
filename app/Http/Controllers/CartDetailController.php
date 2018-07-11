@@ -8,13 +8,21 @@ use App\CartDetails;
 class CartDetailController extends Controller
 {
     public function store(Request $request){
+        $error = false;
         $cartDetail = new CartDetails();
         $cartDetail -> cart_id = auth()->user()->cart->id;
         $cartDetail -> product_id = $request->product_id;
         $cartDetail -> quantity = $request->quantity;
-        $cartDetail -> save();
+        if($cartDetail -> save()){
+            $notification = "Se ha agregado el producto a tu carrito";
+        }
+        else{
+            $error = true;
+            $notification = "Error al agregar el producto. Prueba más tarde";
+
+        }
         
-        return back();
+        return back()->with(compact('notification', 'error'));
     }
 
     public function delete($id){
@@ -23,10 +31,10 @@ class CartDetailController extends Controller
         $error = false;
         if($cartDetail->cart_id === auth()->user()->cart->id){
             $cartDetail->delete();
-            $error = true;
             $notification = "El producto se ha eliminado del carrito correctamente";
         }
         else{
+            $error = true;
             $notification = "Error al eliminar el producto del carrito";
         }
        

@@ -17,6 +17,8 @@ class CreateProductImagesTable extends Migration
             $table->increments('id');
 
             $table ->string('image');
+            $table ->string('name');
+
 
             //campo de imagen destacada
             $table->boolean('featured')->default(false);

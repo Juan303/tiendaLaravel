@@ -11,8 +11,18 @@
     </div>
     <div class="main main-raised">
         <div class="container">
-          
-            <div class="section text-center">
+            @if(session('notification'))
+                @if(session('error')==false)
+                    <div class="alert alert-success mt-4">
+                        {{ session('notification') }}
+                    </div>
+                @else
+                    <div class="alert alert-warning mt-4">
+                        {{ session('notification') }}
+                    </div>
+                @endif
+            @endif
+            <div class="section text-center pt-1">
                 <h2 class="title">Imagenes del producto "{{ $product->name }}"</h2>
                
                
