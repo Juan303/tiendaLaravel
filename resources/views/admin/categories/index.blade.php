@@ -16,7 +16,7 @@
                 <h2 class="title">Listado de categorias</h2>
                 <div class="team">
                     <div class="row">
-                        <a class="btn btn-success" href="{{ url('admin/products/create') }}">Nueva categoria</a>
+                        <a class="btn btn-success" href="{{ url('admin/categories/create') }}">Nueva categoria</a>
                         <table class="table col-md-12">
                             <thead>
                                 <tr>
@@ -32,7 +32,25 @@
                                     <td class="text-center">{{ $category->id }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->description }}</td>
-                                   
+                                   <td class="td-actions text-right">
+                                        <button type="button" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info my-0 py-0">
+                                            <i class="fa fa-info"></i>
+                                        </button>
+                                        <a href="{{ url('admin/categories/edit/'.$category->id) }}"  rel="tooltip" title="Editar" class="btn btn-link px-1 text-info px-0 my-0 py-0">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{ url('admin/categories/images/'.$category->id) }}" rel="tooltip" title="Imagenes" class="btn btn-link px-1 text-info px-0 my-0 py-0">
+                                            <i class="fa fa-image"></i>
+                                        </a>
+                                        <form action="{{ url('admin/categories/'.$category->id) }}" method="post" class="d-inline">
+                                            {{ csrf_field() }} <!-- es equivalente a <input type="hidden" name="_token" value="csrf_token" /> -->
+                                            {{ method_field('DELETE') }} <!-- es equivalente a <input type="hidden" name="_method" value="DELETE" /> -->
+                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn px-1 btn-link text-danger my-0 py-0">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </form>
+
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
