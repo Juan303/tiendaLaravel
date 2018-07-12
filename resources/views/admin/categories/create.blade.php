@@ -21,20 +21,25 @@
                             <label for="name" class="control-label">Nombre</label>
                             <input class="form-control" type="text" name="name" id="name" value="{{ old('name') }}">
                             @if($errors->get('name'))
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach($errors->get('name') as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                @foreach($errors->get('name') as $error)
+                                    <div class="alert alert-danger">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
                             @endif
                         </div>
                     </div>
                 </div>
                 <div class="form-group label-floating">
-                    <label for="name"  class="control-label">Descripcion completa</label>
-                    <textarea class="form-control" name="long_description" id="" cols="30" rows="5">{{ old('long_description') }}</textarea>
+                    <label for="name"  class="control-label">Descripcion</label>
+                    <textarea class="form-control" name="description" id="" cols="30" rows="5">{{ old('description') }}</textarea>
+                     @if($errors->get('description'))
+                        @foreach($errors->get('description') as $error)
+                            <div class="alert alert-danger">
+                                {{ $error }}
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="form-group">
                     <a href="{{ url('admin/categories') }}" class="btn btn-warning">Volver</a>

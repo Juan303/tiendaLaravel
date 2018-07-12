@@ -12,7 +12,7 @@
     <div class="main main-raised">
         <div class="container">
           
-            <div class="section text-center">
+            <div class="section">
                 <h2 class="title">Listado de categorias</h2>
                 <div class="team">
                     <div class="row">
