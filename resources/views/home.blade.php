@@ -13,11 +13,7 @@
         <div class="container">
             <div class="section text-center">
                 <h2 class="title">Bienvenido {{ auth()->user()->name }}</h2>
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
+        
                 <ul class="nav nav-pills nav-pills-icons nav-pills-success mb-3" role="tablist">
                     <!--
                         color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
@@ -38,7 +34,7 @@
                 </ul>
                 <hr>
                 @if(session('notification'))
-                   @if(session('error')==true)
+                   @if(session('error')==false)
                     <div class="alert alert-success">
                         {{ session('notification') }}
                     </div>
@@ -85,6 +81,16 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="text-center">
+                    <form action="{{ url('/pedido_pendiente') }}" method="post">
+                       {{ csrf_field() }}
+                        <button class="btn btn-info">
+                          <i class="material-icons">done</i> Realizar pedido
+                        </button>
+                        <button type="submit" class="btn btn-warning">Vaciar el carrito</button> 
+                    </form>
+                </div>
+                
             </div>
         </div>
     </div>

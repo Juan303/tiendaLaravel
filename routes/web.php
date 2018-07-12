@@ -23,9 +23,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/products/{id}', 'ProductController@show'); //mostrar un producto
 
+//==============================detalles del Carrito
+Route::post('/cart', 'CartDetailController@store'); //almacena un elemento en el carrito
+Route::delete('/cart/{id}', 'CartDetailController@delete'); //elimina un elemento del carrito
+
 //==============================Carrito
-Route::post('/cart', 'CartDetailController@store');
-Route::delete('/cart/{id}', 'CartDetailController@delete');
+Route::post('/pedido_pendiente', 'CartController@pedido_pendiente'); //convierte el carrito en un pedido
+
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group(function(){
     //CRUD productos
@@ -44,6 +48,25 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group
     Route::get('/products/images/{id}', 'ImageController@index'); //listar imagenes
     Route::post('/products/images/{id}', 'ImageController@store'); //almacenar imagenes
     Route::delete('/products/images/{id}', 'ImageController@delete'); //guardar cambios producto
+
+    Route::get('/products/images/select/{id}/{image_id}', 'ImageController@destacar_imagen'); //destacar imagen
+    
+    //CRUD categorias
+    //CR (Create & Read)
+    Route::get('/categories', 'CategoryController@index'); //listar categorias
+    Route::get('/categories/create', 'CategoryController@create'); //formulario de registro de categorias
+    Route::post('/categories', 'CategoryController@store'); //almacenar categoria
+
+    //UD (Update & Delete)
+
+    Route::get('/categories/edit/{id}', 'CategoryController@edit'); //editar categoria
+    Route::post('/categories/update/{id}', 'CategoryController@update'); //guardar cambios categoria
+
+    Route::delete('/categories/{id}', 'CategoryController@delete'); //eliminar categoria
+    
+    Route::get('/categories/images/{id}', 'ImageController@index'); //listar imagenes
+    Route::post('/categories/images/{id}', 'ImageController@store'); //almacenar imagenes
+    Route::delete('/categories/images/{id}', 'ImageController@delete'); //guardar cambios producto
 
     Route::get('/products/images/select/{id}/{image_id}', 'ImageController@destacar_imagen'); //destacar imagen
 });
