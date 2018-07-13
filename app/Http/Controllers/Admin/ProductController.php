@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -35,13 +36,14 @@ class ProductController extends Controller
 
 
     public function index(){
-        $products = Product::paginate(10);
+        $products = Product::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.products.index')->with(compact('products')); //listado de productos
     }
 
 
     public function create(){
-        return view('admin.products.create'); //formulario de registro
+        $categories = Category::all();
+        return view('admin.products.create')->with(compact('categories')); //formulario de registro
     }
 
 
@@ -55,6 +57,7 @@ class ProductController extends Controller
 
         $product->name = $request->input('name');
         $product->price = $request->input('price');
+        $product->category_id = $request->input('category');
         $product->description = $request->input('description');
         $product->long_description = $request->input('long_description');
 

@@ -46,14 +46,8 @@
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->description }}</td>
                                     <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info my-0 py-0">
-                                            <i class="fa fa-info"></i>
-                                        </button>
                                         <a href="{{ url('admin/categories/edit/'.$category->id) }}"  rel="tooltip" title="Editar" class="btn btn-link px-1 text-info px-0 my-0 py-0">
                                             <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a href="{{ url('admin/categories/images/'.$category->id) }}" rel="tooltip" title="Imagenes" class="btn btn-link px-1 text-info px-0 my-0 py-0">
-                                            <i class="fa fa-image"></i>
                                         </a>
                                         <form action="{{ url('admin/categories/'.$category->id) }}" method="post" class="d-inline">
                                             {{ csrf_field() }} <!-- es equivalente a <input type="hidden" name="_token" value="csrf_token" /> -->

@@ -13,7 +13,18 @@
         <div class="container">
             <div class="section text-center">
                 <h2 class="title">Editar categoria #{{ $category->id }}</h2>
-                <form action="{{ url('/admin/categories') }}" method="post" enctype="multipart/form-data">
+                 @if(session('notification'))
+                    @if(session('error')==false)
+                        <div class="alert alert-success mt-4">
+                            {{ session('notification') }}
+                        </div>
+                    @else
+                        <div class="alert alert-warning mt-4">
+                            {{ session('notification') }}
+                        </div>
+                    @endif
+                @endif
+                <form action="{{ url('/admin/categories/update/'.$category->id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-sm-6">
@@ -50,7 +61,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Imagen de la categoria</h5>
                                 <div class="custom-file text-left">
-                                    <input type="file" name="photo" value="{{ old('photo') }}" class="custom-file-input" id="validatedCustomFile" required lang="es">
+                                    <input type="file" name="image" value="{{ old('photo') }}" class="custom-file-input" id="validatedCustomFile" lang="es">
                                     <label class="custom-file-label" for="validatedCustomFile">Seleccionar...</label>
                                 </div>
                             </div>

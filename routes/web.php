@@ -59,8 +59,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group
 
     //UD (Update & Delete)
 
-    Route::get('/categories/edit/{id}', 'CategoryController@edit'); //editar categoria
-    Route::post('/categories/update/{id}', 'CategoryController@update'); //guardar cambios categoria
+    Route::get('/categories/edit/{category}', 'CategoryController@edit'); //editar categoria
+    Route::post('/categories/update/{category}', 'CategoryController@update'); //guardar cambios categoria
 
     Route::delete('/categories/{id}', 'CategoryController@delete'); //eliminar categoria
     

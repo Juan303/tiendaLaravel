@@ -40,16 +40,16 @@
                                         <button type="button" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info my-0 py-0">
                                             <i class="fa fa-info"></i>
                                         </button>
-                                        <a href="{{ url('admin/products/edit/'.$product->id) }}"  rel="tooltip" title="Editar" class="btn btn-link px-1 text-info px-0 my-0 py-0">
+                                        <a href="{{ url('admin/products/edit/'.$product->id) }}"  rel="tooltip" title="Editar datos" class="btn btn-link px-1 text-success px-0 my-0 py-0">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="{{ url('admin/products/images/'.$product->id) }}" rel="tooltip" title="Editar" class="btn btn-link px-1 text-info px-0 my-0 py-0">
+                                        <a href="{{ url('admin/products/images/'.$product->id) }}" rel="tooltip" title="Editar imagenes" class="btn btn-link px-1 text-warning px-0 my-0 py-0">
                                             <i class="fa fa-image"></i>
                                         </a>
                                         <form action="{{ url('admin/products/'.$product->id) }}" method="post" class="d-inline">
                                             {{ csrf_field() }} <!-- es equivalente a <input type="hidden" name="_token" value="csrf_token" /> -->
                                             {{ method_field('DELETE') }} <!-- es equivalente a <input type="hidden" name="_method" value="DELETE" /> -->
-                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn px-1 btn-link text-danger my-0 py-0">
+                                            <button type="submit" rel="tooltip" title="Eliminar producto" class="btn px-1 btn-link text-danger my-0 py-0">
                                                 <i class="fa fa-times"></i>
                                             </button>
                                         </form>
