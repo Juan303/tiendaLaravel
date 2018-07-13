@@ -32,7 +32,7 @@ Route::post('/pedido_pendiente', 'CartController@pedido_pendiente'); //convierte
 
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group(function(){
-    //CRUD productos
+    //==================================================================================================================CRUD productos
     //CR (Create & Read)
     Route::get('/products', 'ProductController@index'); //listar
     Route::get('/products/create', 'ProductController@create'); //formulario de registro
@@ -51,7 +51,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group
 
     Route::get('/products/images/select/{id}/{image_id}', 'ImageController@destacar_imagen'); //destacar imagen
     
-    //CRUD categorias
+    //==================================================================================================================CRUD categorias
     //CR (Create & Read)
     Route::get('/categories', 'CategoryController@index'); //listar categorias
     Route::get('/categories/create', 'CategoryController@create'); //formulario de registro de categorias

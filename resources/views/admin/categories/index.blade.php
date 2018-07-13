@@ -14,6 +14,17 @@
           
             <div class="section">
                 <h2 class="title">Listado de categorias</h2>
+                @if(session('notification'))
+                    @if(session('error')==false)
+                        <div class="alert alert-success mt-4">
+                            {{ session('notification') }}
+                        </div>
+                    @else
+                        <div class="alert alert-warning mt-4">
+                            {{ session('notification') }}
+                        </div>
+                    @endif
+                @endif
                 <div class="team">
                     <div class="row">
                         <a class="btn btn-success" href="{{ url('admin/categories/create') }}">Nueva categoria</a>
@@ -21,6 +32,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
+                                    <th class="text-center">Imagen</th>
                                     <th class="">Nombre</th>
                                     <th class="">Descripción</th>
                                     <th class="text-right" style="width:15%">Opciones</th>
@@ -30,9 +42,10 @@
                                 @foreach($categories as $category)
                                 <tr>
                                     <td class="text-center">{{ $category->id }}</td>
+                                    <td><img src="{{ $category->url_image }}" alt="Category image" width="60px"></td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->description }}</td>
-                                   <td class="td-actions text-right">
+                                    <td class="td-actions text-right">
                                         <button type="button" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info my-0 py-0">
                                             <i class="fa fa-info"></i>
                                         </button>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Category;
+use File;
 
 class CategoryController extends Controller
 {
@@ -38,20 +39,32 @@ class CategoryController extends Controller
         $error = false;
         $this->validate($request, $this->rules, $this->messages);
 
-        $category = new Category();
-
-        $category->name = $request->input('name');
-        $category->description = $request->input('description');
-
-        if($category->save()){
-            $notification = "La categoria ha sido registrada con exito";
+        $file = $request->file('photo');
+        $path = public_path().'/images/categories';
+        $fileName = uniqid().$file->getClientOriginalName();
+        if($file->move($path, $fileName)){
+            $category = new Category();
+            $category->name = $request->input('name');
+            $category->description = $request->input('description');
+            $category->image = $fileName;
+            if ($category->save()) {
+                $notification = "La categoria ha sido registrada con exito";
+            } else {
+                $notification = "Error al registrar la categoria. Prueba de nuevo mas tarde";
+                $error = true;
+            } //insert
         }
         else{
-            $notification = "Error al registrar la categoria. Prueba de nuevo mas tarde";
             $error = true;
-        } //insert
+            $notification = "Error al subir la imagen. Categoria no creada. Prueba de nuevo mas tarde";
+        }
+
         //return redirect('admin/categories/images/'.$product->id)->with(compact('notification', 'error'));
         return redirect('admin/categories')->with(compact('notification', 'error'));
-
+    }
+      
+    public function edit($id){
+        $category = Category::find($id);
+        return view('admin.categories.edit')->with(compact('category')); //formulario de registro de categorias
     }
 }
