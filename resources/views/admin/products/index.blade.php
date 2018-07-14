@@ -14,6 +14,17 @@
           
             <div class="section text-center">
                 <h2 class="title">Listado de productos</h2>
+                 @if(session('notification'))
+                    @if(session('error')==false)
+                        <div class="alert alert-success mt-4">
+                            {{ session('notification') }}
+                        </div>
+                    @else
+                        <div class="alert alert-warning mt-4">
+                            {{ session('notification') }}
+                        </div>
+                    @endif
+                @endif
                 <div class="team">
                     <div class="row">
                         <a class="btn btn-success" href="{{ url('admin/products/create') }}">Nuevo producto</a>

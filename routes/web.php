@@ -40,10 +40,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group
 
     //UD (Update & Delete)
 
-    Route::get('/products/edit/{id}', 'ProductController@edit'); //editar producto
-    Route::post('/products/update/{id}', 'ProductController@update'); //guardar cambios producto
+    Route::get('/products/edit/{product}', 'ProductController@edit'); //editar producto
+    Route::post('/products/update/{product}', 'ProductController@update'); //guardar cambios producto
 
-    Route::delete('/products/{id}', 'ProductController@delete'); //eliminar producto
+    Route::delete('/products/{product}', 'ProductController@delete'); //eliminar producto
     
     Route::get('/products/images/{id}', 'ImageController@index'); //listar imagenes
     Route::post('/products/images/{id}', 'ImageController@store'); //almacenar imagenes
@@ -64,11 +64,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group
 
     Route::delete('/categories/{category}', 'CategoryController@delete'); //eliminar categoria
     
-    Route::get('/categories/images/{id}', 'ImageController@index'); //listar imagenes
-    Route::post('/categories/images/{id}', 'ImageController@store'); //almacenar imagenes
-    Route::delete('/categories/images/{id}', 'ImageController@delete'); //guardar cambios producto
-
-    Route::get('/products/images/select/{id}/{image_id}', 'ImageController@destacar_imagen'); //destacar imagen
 });
 
 

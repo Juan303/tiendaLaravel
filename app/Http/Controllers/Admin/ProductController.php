@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\ImageController;
 
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use File;
 
 class ProductController extends Controller
 {
@@ -48,55 +50,72 @@ class ProductController extends Controller
         $product->long_description = $request->input('long_description');
 
         if($product->save()){
-            $notification = $this->flash_messages['register_product_success'];
+            $notification = "Producto registrado correctamente.";
         }
         else{
-            $notification = $this->flash_messages['register_product_error'];
+            $notification = "Error al registrar el producto. Pruebe de nuevo más tarde.";
             $error = true;
         } //insert
-
-
 
         return redirect('admin/products/images/'.$product->id)->with(compact('notification', 'error'));
     }
 
 
-    public function edit($id){
-        $product = Product::find($id);
+    public function edit(Product $product){
         $images = $product->product_images;
-        return view('admin.products.edit')->with(compact('product', 'images')); //formulario de registro
+        $categories = Category::all();
+        return view('admin.products.edit')->with(compact('product', 'images', 'categories')); //formulario de registro
     }
 
 
-     public function update(Request $request, $id){
+     public function update(Request $request, Product $product){
 
         $this->validate($request, Product::$rules, Product::$messages);
-
-
-        $product = Product::find($id); //busco el producto donde guardar la info
+        $error = false;
 
         $product->name = $request->input('name');
         $product->price = $request->input('price');
+        $product->category_id = $request->input('category');
         $product->description = $request->input('description');
         $product->long_description = $request->input('long_description');
 
-        $product->save(); //guardo la info
+        if($product->save()){
+            $notification = "Cambios realizados correctamente.";    
+        }
+        else{
+            $error = true;
+            $notification = "Error al registrar los cambios, pruebe de nuevo más tarde."; 
+        }//guardo la info
 
-        return redirect('');
+        return back()->with(compact('error', 'notification'));
     }
 
 
-    public function delete($id){
-        $product = Product::find($id);
-        $product->delete(); //lo borro;
-        return back(); // redirect a la pagina anterior
+    public function delete(Product $product){
+        $error = false;
+        $product_images = $product->product_images;
+        foreach($product_images as $product_image){
+            $delete = true;
+            if(substr($product_image->image, 0, 4) !== 'http'){
+                $fullPath = public_path().'/images/products/'.$product_image->image;
+                $delete = File::delete($fullPath);
+            }
+            if($delete){
+                $product_image->delete();
+            }
+        }
+        if($product->delete()){
+            $notification = "Producto eliminado correctamente";    
+        }
+        else{
+            $error = true;
+            $notification = "Error al eliminar el producto, pruebe de nuevo más tarde."; 
+        }//borro el producto
+        return back()->with(compact('error', 'notification')); // redirect a la pagina anterior
     }
 
 
-    public function show($id){
-        $product = Product::find($id);
+    public function show(Product $product){
         return view('admin.products.edit')->with(compact('product', 'images'));
-
-
     }
 }
