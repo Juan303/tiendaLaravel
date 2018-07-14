@@ -21,13 +21,11 @@
                             <label for="name" class="control-label">Nombre</label>
                             <input class="form-control" type="text" name="name" id="name" value="{{ old('name') }}">
                             @if($errors->get('name'))
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach($errors->get('name') as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                @foreach($errors->get('name') as $error)
+                                    <div class="alert alert-danger">
+                                        {{ $error }} 
+                                    </div>
+                                @endforeach
                             @endif
                         </div>
                     
@@ -37,13 +35,11 @@
                             <label for="name" class="control-label">Precio</label>
                             <input class="form-control" step="0.01" type="number" name="price" id="price" value="{{ old('price') }}">
                             @if($errors->get('price'))
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach($errors->get('price') as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                @foreach($errors->get('price') as $error)
+                                    <div class="alert alert-danger">
+                                        {{ $error }} 
+                                    </div>
+                                @endforeach
                             @endif
                         </div>
                         
@@ -55,13 +51,11 @@
                             <label for="name" class="control-label">Descripcion Corta</label>
                             <input class="form-control" type="text" name="description" id="description" value="{{ old('description') }}">
                             @if($errors->get('description'))
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach($errors->get('description') as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                @foreach($errors->get('description') as $error)
+                                    <div class="alert alert-danger">
+                                        {{ $error }} 
+                                    </div>
+                                @endforeach
                             @endif
                         </div>
                     </div>

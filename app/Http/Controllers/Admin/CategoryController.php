@@ -78,16 +78,14 @@ class CategoryController extends Controller
         return back()->with(compact('notification', 'error'));
     }
     
-    public function delete($id){
+    public function delete(Category $category){
         $error = false;
-        $category = Category::find($id);
         if($category->delete()){
             $notification = "Categoria eliminada con éxito";
         }
         else{
             $error = true;
             $notification = "Error al eliminar la categoria. Prueba de nuevo más tarde";
-
         }//lo borro;
         
         return back()->with(compact('notification', 'error')); // redirect a la pagina anterior

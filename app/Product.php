@@ -9,7 +9,23 @@ use App\Category;
 
 class Product extends Model
 {
-    //
+    
+    public static $messages = [
+        'name.required' => 'El campo nombre es obligatorio',
+        'name.min' => 'El campo nombre debe contener 3 caracteres como mínimo',
+        'description.required' => 'El campo descripcion es obligatorio',
+        'description.max' => 'El campo descripcion no puede contener mas de 200 caracteres',
+        'price.required' => 'El campo del precio es obligatorio',
+        'price.numeric' => 'El campo del precio debe ser numérico',
+        'price.min' => 'El campo del precio debe ser un numero positivo',
+    ];
+
+    public static $rules = [
+        'name' => 'required|min:3',
+        'description' => 'required|max:200',
+        'price' => 'required|numeric|min:0',
+    ];
+
     public function category(){
         return $this->belongsTo(Category::class);
     }
@@ -34,7 +50,7 @@ class Product extends Model
     public function getCategoryNameAttribute(){
         
         if(!isset($this->category->name)){
-           return "Sin categoria";
+           return "General";
         }
         return $this->category->name;
     }

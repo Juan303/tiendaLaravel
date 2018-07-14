@@ -62,7 +62,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group
     Route::get('/categories/edit/{category}', 'CategoryController@edit'); //editar categoria
     Route::post('/categories/update/{category}', 'CategoryController@update'); //guardar cambios categoria
 
-    Route::delete('/categories/{id}', 'CategoryController@delete'); //eliminar categoria
+    Route::delete('/categories/{category}', 'CategoryController@delete'); //eliminar categoria
     
     Route::get('/categories/images/{id}', 'ImageController@index'); //listar imagenes
     Route::post('/categories/images/{id}', 'ImageController@store'); //almacenar imagenes

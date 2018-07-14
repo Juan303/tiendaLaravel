@@ -14,21 +14,7 @@ class ProductController extends Controller
 
     //reglas de validacion
 
-    private $messages = [
-        'name.required' => 'El campo nombre es obligatorio',
-        'name.min' => 'El campo nombre debe contener 3 caracteres como mínimo',
-        'description.required' => 'El campo descripcion es obligatorio',
-        'description.max' => 'El campo descripcion no puede contener mas de 200 caracteres',
-        'price.required' => 'El campo del precio es obligatorio',
-        'price.numeric' => 'El campo del precio debe ser numérico',
-        'price.min' => 'El campo del precio debe ser un numero positivo',
-    ];
-
-    private $rules = [
-        'name' => 'required|min:3',
-        'description' => 'required|max:200',
-        'price' => 'required|numeric|min:0',
-    ];
+   
     private $flash_messages = [
         'register_product_error' => 'Error al registrar el producto. Pruebe de nuevo más tarde',
         'register_product_success' => 'Producto registrado con éxito'
@@ -51,7 +37,7 @@ class ProductController extends Controller
 
         //dd($request->all()); //muestra todos los datos request
         $error = false;
-        $this->validate($request, $this->rules, $this->messages);
+        $this->validate($request, Product::$rules, Product::$messages);
 
         $product = new Product();
 
@@ -84,7 +70,7 @@ class ProductController extends Controller
 
      public function update(Request $request, $id){
 
-        $this->validate($request, $this->rules, $this->messages);
+        $this->validate($request, Product::$rules, Product::$messages);
 
 
         $product = Product::find($id); //busco el producto donde guardar la info
