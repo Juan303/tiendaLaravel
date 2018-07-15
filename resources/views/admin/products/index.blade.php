@@ -48,9 +48,9 @@
                                     <td>{{ $product->category_name }}</td>
                                     <td class="text-right">{{ $product->price }}€</td>
                                     <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info my-0 py-0">
+                                        <a href="{{ url('products/'.$product->id) }}" target="_blank" rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info my-0 py-0">
                                             <i class="fa fa-info"></i>
-                                        </button>
+                                        </a>
                                         <a href="{{ url('admin/products/edit/'.$product->id) }}"  rel="tooltip" title="Editar datos" class="btn btn-link px-1 text-success px-0 my-0 py-0">
                                             <i class="fa fa-edit"></i>
                                         </a>
