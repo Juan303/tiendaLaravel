@@ -44,7 +44,8 @@
                     </div>
                     @endif
                 @endif
-                <p>Tu carrito de compra tiene {{ count(auth()->user()->cart->details) }} productos</p>
+                <!-- <p>Tu carrito de compra tiene {{ count(auth()->user()->cart->details) }} productos</p> -->
+                <p>Tu carrito de compra tiene {{ NewCart::count() }} productos</p>
                
                 <table class="table col-md-12">
                     <thead>
@@ -79,6 +80,27 @@
                             </td>
                         </tr>
                         @endforeach
+                        @foreach(NewCart::content() as $cartdetail)
+                        <tr>
+                            <td><img src="{{ $cartdetail->options->product->featured_image_url }}" alt="" height="70px"></td>
+                            <td><a href="{{ url('products/'.$cartdetail->options->product->id) }}" target="_blank">{{ $cartdetail->name }}</a></td>
+                            <td class="text-right">{{ $cartdetail->price }}&euro;</td>
+                            <td>{{ $cartdetail->qty }}</td>
+                            <td>{{ $cartdetail->total(2, ".", ".") }}€</td>
+                            <td class="td-actions text-right">
+                                <a href="{{ url('products/'.$cartdetail->options->product->id) }}" target="_blank"  rel="tooltip" title="Detalles" class="btn btn-link px-1 text-info my-0 py-0">
+                                    <i class="fa fa-info"></i>
+                                </a>
+                                 <form action="{{ url('cart/'.$cartdetail->rowId) }}" method="post" class="d-inline">
+                                    {{ csrf_field() }} <!-- es equivalente a <input type="hidden" name="_token" value="csrf_token" /> -->
+                                    {{ method_field('DELETE') }} <!-- es equivalente a <input type="hidden" name="_method" value="DELETE" /> -->
+                                    <button type="submit" rel="tooltip" title="Eliminar" class="btn px-1 btn-link text-danger my-0 py-0">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 <div class="text-center">
@@ -87,7 +109,7 @@
                         <button class="btn btn-info">
                           <i class="material-icons">done</i> Realizar pedido
                         </button>
-                        <button type="submit" class="btn btn-warning">Vaciar el carrito</button> 
+                        <a href="{{ url('/vaciar_carrito') }}" class="btn btn-warning">Vaciar el carrito</a> 
                     </form>
                 </div>
                 

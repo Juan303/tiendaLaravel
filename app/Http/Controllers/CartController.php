@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use NewCart;
 
 class CartController extends Controller
 {
     public function pedido_pendiente(){
+      
+        NewCart::store(auth()->user()->id);
+        return back();
+    }
+    /* public function pedido_pendiente(){
         $error = false;
         $cart = auth()->user()->cart;
         $cart->status = "pendiente";
@@ -19,5 +25,10 @@ class CartController extends Controller
         }
         
         return back()->with(compact('notification', 'error'));
+    } */
+
+    public function vaciar(){
+        NewCart::destroy();
+        return back();
     }
 }

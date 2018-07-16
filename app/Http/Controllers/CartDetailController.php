@@ -5,21 +5,42 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CartDetails;
 use App\Cart;
+use NewCart;
+use App\Product;
+
 
 class CartDetailController extends Controller
 {
     public function store(Request $request){
-        if(auth()->user()){
-            $cartDetail -> cart_id = auth()->user()->cart->id;
+
+        $product = Product::find($request->product_id);
+
+        if(NewCart::count()>0){
+            foreach(NewCart::content() as $cartItem){
+                if($cartItem->options->product->id == $product->id){
+                    NewCart::update($cartItem->rowId, ($cartItem->qty+$request->quantity));
+                }
+            }
         }
         else{
+            NewCart::add(uniqid(), $product->name, $request->quantity, $product->price, ['product' => $product]);
+        }
+        
+       /*  if(auth()->user()){
+            $product = Product::find($request->product_id);
+            NewCart::add(auth()->user()->id, $request->product_id, $request->quantity, $product->price);
+        }
+        else{
+            $product = Product::find($request->product_id);
+            NewCart::add(uniqid(), $request->product_id, $request->quantity, $product->price);
             $cart = new Cart;
             $cart -> status = 'active';
             $cart -> guest_id = uniqid();
             $cart ->save();
             $cartDetail -> cart_id = $cart->id;
-        }
-        $error = false;
+        } */
+        $notification = NewCart::content();
+       /* $error = false;
         $cartDetail = new CartDetails(); 
         $cartDetail -> product_id = $request->product_id;
         $cartDetail -> quantity = $request->quantity;
@@ -29,12 +50,12 @@ class CartDetailController extends Controller
         else{
             $error = true;
             $notification = "Error al agregar el producto. Prueba más tarde";
-        }
+        } */
         
         return back()->with(compact('notification', 'error'));
     }
 
-    public function delete($id){
+   /*  public function delete($id){
         
         $cartDetail = CartDetails::find($id);
         $error = false;
@@ -48,5 +69,10 @@ class CartDetailController extends Controller
         }
        
         return back()->with(compact('notification', 'error'));
+    } */
+
+     public function delete($id){
+       NewCart::remove($id);
+       return back();
     }
 }

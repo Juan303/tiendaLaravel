@@ -28,6 +28,7 @@ Route::post('/cart', 'CartDetailController@store'); //almacena un elemento en el
 Route::delete('/cart/{id}', 'CartDetailController@delete'); //elimina un elemento del carrito
 
 //==============================Carrito
+Route::get('/vaciar_carrito', 'CartController@vaciar'); //vaciar el carrito
 Route::post('/pedido_pendiente', 'CartController@pedido_pendiente'); //convierte el carrito en un pedido
 
 
