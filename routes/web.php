@@ -23,6 +23,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/products/{id}', 'ProductController@show'); //mostrar un producto
 
+//============================================PEDIDOS
+Route::middleware(['auth'])->group(function(){
+    Route::get('/order', 'OrderController@index'); //vaciar el carrito
+});
+
+
+
+
+
 //==============================detalles del Carrito
 Route::post('/cart', 'CartDetailController@store'); //almacena un elemento en el carrito
 Route::delete('/cart/{id}', 'CartDetailController@delete'); //elimina un elemento del carrito

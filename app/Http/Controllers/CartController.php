@@ -7,10 +7,13 @@ use NewCart;
 
 class CartController extends Controller
 {
-    public function pedido_pendiente(){
-      
-        NewCart::store(auth()->user()->id);
-        return back();
+    public function pedido_pendiente(){   
+        $error = false;
+        if(NewCart::store(auth()->user()->id)){
+            return view('orders/details');
+        }
+       
+        return back()->with(compact('notification', 'error'));
     }
     /* public function pedido_pendiente(){
         $error = false;

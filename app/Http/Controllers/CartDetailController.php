@@ -12,18 +12,28 @@ use App\Product;
 class CartDetailController extends Controller
 {
     public function store(Request $request){
-
+        $error = false;
         $product = Product::find($request->product_id);
 
         if(NewCart::count()>0){
             foreach(NewCart::content() as $cartItem){
                 if($cartItem->options->product->id == $product->id){
-                    NewCart::update($cartItem->rowId, ($cartItem->qty+$request->quantity));
+                    if(!NewCart::update($cartItem->rowId, ($cartItem->qty+$request->quantity))){
+                        $error = true;
+                    }
                 }
             }
         }
         else{
-            NewCart::add(uniqid(), $product->name, $request->quantity, $product->price, ['product' => $product]);
+            if(!NewCart::add(uniqid(), $product->name, $request->quantity, $product->price, ['product' => $product])){
+                $error = true;
+            }
+        }
+        if($error){
+            $notification = "Error al agregar el producto al carrito";
+        }
+        else{
+            $notification = "Producto agregado correctamente";
         }
         
        /*  if(auth()->user()){
@@ -39,7 +49,7 @@ class CartDetailController extends Controller
             $cart ->save();
             $cartDetail -> cart_id = $cart->id;
         } */
-        $notification = NewCart::content();
+        
        /* $error = false;
         $cartDetail = new CartDetails(); 
         $cartDetail -> product_id = $request->product_id;

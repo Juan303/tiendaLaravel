@@ -12,27 +12,9 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
-                <h2 class="title">Bienvenido {{ auth()->user()->name }}</h2>
+                <h2 class="title">Seleccione el metodo de envio</h2>
         
-                <ul class="nav nav-pills nav-pills-icons nav-pills-success mb-3" role="tablist">
-                    <!--
-                        color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
-                    -->
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
-                            <i class="material-icons">dashboard</i>
-                            Carrito de compra
-                        </a>
-                    </li>
-                   
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tasks-1" role="tab" data-toggle="tab">
-                            <i class="material-icons">list</i>
-                            Pedidos realizados
-                        </a>
-                    </li>
-                </ul>
-                <hr>
+               
                 @if(session('notification'))
                    @if(session('error')==false)
                     <div class="alert alert-success">
@@ -106,9 +88,6 @@
                 <div class="text-center">
                     <form action="{{ url('/pedido_pendiente') }}" method="post">
                        {{ csrf_field() }}
-                        <a href="{{ url('/order') }}" class="btn btn-info">
-                          <i class="material-icons">done</i> Realizar pedido
-                        </a>
                         <button class="btn btn-info">
                           <i class="material-icons">done</i> Realizar pedido
                         </button>
