@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Cart;
+use App\Order;
 
 class User extends Authenticatable
 {
@@ -35,6 +36,9 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class);
     }
     
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
     
     public function getCartAttribute(){
         $cart = $this->carts()->where('status', 'active')->first();

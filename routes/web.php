@@ -25,7 +25,8 @@ Route::get('/products/{id}', 'ProductController@show'); //mostrar un producto
 
 //============================================PEDIDOS
 Route::middleware(['auth'])->group(function(){
-    Route::get('/order', 'OrderController@index'); //vaciar el carrito
+    Route::get('/order', 'OrderController@index'); //datos del pedido
+    Route::post('/finalizar_pedido/{user_id}', 'OrderController@finalizar_pedido'); //datos del pedido
 });
 
 

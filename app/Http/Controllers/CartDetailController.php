@@ -13,18 +13,20 @@ class CartDetailController extends Controller
 {
     public function store(Request $request){
         $error = false;
+        $encontrado = false;
         $product = Product::find($request->product_id);
-
+        
         if(NewCart::count()>0){
             foreach(NewCart::content() as $cartItem){
                 if($cartItem->options->product->id == $product->id){
+                    $encontrado = true;
                     if(!NewCart::update($cartItem->rowId, ($cartItem->qty+$request->quantity))){
                         $error = true;
                     }
                 }
             }
         }
-        else{
+       if(!$encontrado){
             if(!NewCart::add(uniqid(), $product->name, $request->quantity, $product->price, ['product' => $product])){
                 $error = true;
             }
