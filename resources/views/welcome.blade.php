@@ -4,7 +4,19 @@
 
 @section('title', 'Mi tienda Laravel')
 
-
+@section('styles')
+    <style>
+        .tt-menu{
+            background-color:white;
+            border:1px solid black;
+        }
+        .tt-suggestion{
+            border-bottom: 1px solid black;
+        }
+    
+    
+    </style>
+@endsection
 
 @section('content')
 
@@ -29,16 +41,19 @@
             <div class="section text-center">
                 <h2 class="title">Categorias disponibles</h2>
                 <div class="row">
-                    
+                    <div class="col-7">
                         <form action="{{ url('/search/show') }}" class="form-inline mx-auto">
                             {{ csrf_field() }}
                             <div class="form-group pt-1">
-                                <input id="buscar" type="text" placeholder="Buscar..." class="form-control pt-0" name="cadena">
+                                <input id="buscar" type="text" placeholder="Buscar..." class="form-control pt-0 " name="cadena">
                             </div>
                             <button type="submit" class="btn btn-success btn-just-icon">
                                 <i class="material-icons">search</i>
                             </button>
                         </form>
+                    </div>
+                        
+                        
                     
                 </div>
                 
@@ -79,7 +94,7 @@
             var products = new Bloodhound({
               queryTokenizer: Bloodhound.tokenizers.whitespace,
               datumTokenizer: Bloodhound.tokenizers.whitespace,
-              prefetch: {{ url('products/json') }}
+              prefetch: '{{ url('/search/json') }}'
             });
             
             $('#buscar').typeahead({

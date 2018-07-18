@@ -28,6 +28,9 @@ Route::get('/categories/{category}', 'CategoryController@show'); //mostrar produ
 
 //======================================Buscar
 Route::get('/search/show', 'SearchController@show'); //buscador
+Route::get('/search/json', 'SearchController@data'); //buscador
+
+
 
 
 

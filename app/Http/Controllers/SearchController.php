@@ -14,4 +14,10 @@ class SearchController extends Controller
 
         return view('search/show')->with(compact('products', 'cadena'));
     }
+
+    public function data(){
+
+        $products = Product::pluck('name');
+        return $products;
+    }
 }
