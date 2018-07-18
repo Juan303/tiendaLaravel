@@ -46,7 +46,7 @@
                         <h5 class="card-title">Imagen de la categoria</h5>
                         {{ csrf_field() }}
                         <div class="custom-file text-left">
-                            <input type="file" name="photo" value="{{ old('photo') }}" class="custom-file-input" id="validatedCustomFile"  lang="es">
+                            <input type="file" name="image" value="{{ old('photo') }}" class="custom-file-input" id="validatedCustomFile"  lang="es">
                             <label class="custom-file-label" for="validatedCustomFile">Seleccionar...</label>
                         </div>
                     </div>

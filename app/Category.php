@@ -30,9 +30,14 @@ class Category extends Model
 
     //ACCESSORS
     public function getUrlImageAttribute(){
-        
+    
         if($this->image == NULL){
             return '/images/categories/default.png';
+        }
+        else{
+            if (substr($this->image, 0, 4) === "http") {
+                return $this->image;
+            }
         }
         return '/images/categories/'.$this->image;
     }

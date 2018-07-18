@@ -23,13 +23,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/products/{id}', 'ProductController@show'); //mostrar un producto
 
-//============================================PEDIDOS
-Route::middleware(['auth'])->group(function(){
-    Route::get('/order', 'OrderController@index'); //datos del pedido
-    Route::post('/finalizar_pedido/{user_id}', 'OrderController@finalizar_pedido'); //datos del pedido
-});
+//=======================================Categorias
+Route::get('/categories/{category}', 'CategoryController@show'); //mostrar productos de esa categoria
 
-
+//======================================Buscar
+Route::get('/search/show', 'SearchController@show'); //buscador
 
 
 
@@ -41,6 +39,12 @@ Route::delete('/cart/{id}', 'CartDetailController@delete'); //elimina un element
 Route::get('/vaciar_carrito', 'CartController@vaciar'); //vaciar el carrito
 Route::post('/pedido_pendiente', 'CartController@pedido_pendiente'); //convierte el carrito en un pedido
 
+
+//============================================PEDIDOS
+Route::middleware(['auth'])->group(function () {
+    Route::get('/order', 'OrderController@index'); //datos del pedido
+    Route::post('/finalizar_pedido/{user_id}', 'OrderController@finalizar_pedido'); //datos del pedido
+});
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group(function(){
     //==================================================================================================================CRUD productos

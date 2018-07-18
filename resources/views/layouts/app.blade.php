@@ -18,6 +18,7 @@
   <link href="{{ asset('css/material-kit.css?v=2.0.3') }}" rel="stylesheet" />
   <link href="{{ asset('demo/demo.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/mi_css.css') }}" rel="stylesheet" />
+  @yield('styles')
 </head>
 
 <body class="@yield('body-class')">
