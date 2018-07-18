@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="{{ asset('css/material-kit.css?v=2.0.3') }}" rel="stylesheet" />
-  <link href="{{ asset('demo/demo.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/mi_css.css') }}" rel="stylesheet" />
   @yield('styles')
 </head>
@@ -100,7 +99,7 @@
   <script src="{{ asset('js/plugins/nouislider.min.js') }}" type="text/javascript"></script>
   <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('js/material-kit.js?v=2.0.3') }}" type="text/javascript"></script>
-
+@yield('scripts')
 </body>
 </html>
 

@@ -48,6 +48,16 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Subtotal</td>
+                            <td>100€</td>
+                        </tr>
+                          <tr>
+                            <td colspan="4"></td>
+                            <td>100€</td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <div class="text-center">
                     <form action="{{ url('/finalizar_pedido/'.auth()->user()->id) }}" method="post">

@@ -4,6 +4,8 @@
 
 @section('title', 'Mi tienda Laravel')
 
+
+
 @section('content')
 
     <div class="page-header header-filter" data-parallax="true" style="background-image: url('{{ asset('img/profile_city.jpg')}}')">
@@ -27,17 +29,17 @@
             <div class="section text-center">
                 <h2 class="title">Categorias disponibles</h2>
                 <div class="row">
-                    <div class="col-5">
-                        <form action="{{ url('/search/show') }}" class="">
+                    
+                        <form action="{{ url('/search/show') }}" class="form-inline mx-auto">
                             {{ csrf_field() }}
                             <div class="form-group pt-1">
-                                <input type="text" placeholder="Buscar..." class="form-control pt-0" name="cadena">
+                                <input id="buscar" type="text" placeholder="Buscar..." class="form-control pt-0" name="cadena">
                             </div>
                             <button type="submit" class="btn btn-success btn-just-icon">
                                 <i class="material-icons">search</i>
                             </button>
                         </form>
-                    </div>
+                    
                 </div>
                 
 
@@ -66,6 +68,28 @@
     </div>
     @include('includes.footer')
     
-    
 
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('js/typeahead.bundle.js') }}"></script>
+    <script>
+        $(function(){
+            
+            var products = new Bloodhound({
+              queryTokenizer: Bloodhound.tokenizers.whitespace,
+              datumTokenizer: Bloodhound.tokenizers.whitespace,
+              prefetch: {{ url('products/json') }}
+            });
+            
+            $('#buscar').typeahead({
+                hint: true,
+                minLength: 1,
+                highlight: true
+            },{
+                name: 'products',
+                source: products 
+            })
+        })
+    </script>
 @endsection
